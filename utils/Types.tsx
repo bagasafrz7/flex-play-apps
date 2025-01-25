@@ -4,6 +4,7 @@ export interface ICategory {
  name: string;
  icon: IconSymbolName;
  id: string;
+ link: string;
 }
 
 export interface CategoriesProps {

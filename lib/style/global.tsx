@@ -28,6 +28,10 @@ export const globalStyle = StyleSheet.create({
   fontWeight: "600",
  },
  viewAll: {
-  color: "#666",
+  color: Colors.primary,
+ },
+ skeleton: {
+  backgroundColor: "#e0e0e0",
+  borderRadius: 4,
  },
 });
