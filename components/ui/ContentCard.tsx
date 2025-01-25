@@ -1,11 +1,12 @@
 import { Colors } from "@/utils/Constant";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
 interface ContentCardProps {
  id?: number;
  title?: string;
  description?: string;
  thumbnail?: string;
+ onPress?: () => void;
 }
 
 export function ContentCard({
@@ -13,13 +14,18 @@ export function ContentCard({
  title,
  description,
  thumbnail,
+ onPress,
 }: ContentCardProps) {
  return (
-  <View style={styles.cardContainer}>
-   <View style={styles.cardThumbnail} />
-   <Text style={styles.cardTitle}>{title}</Text>
-   <Text style={styles.cardDesc}>{description}</Text>
-  </View>
+  <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
+   <Image source={{ uri: thumbnail }} style={styles.cardThumbnail} />
+   <Text style={styles.cardTitle} numberOfLines={2}>
+    {title}
+   </Text>
+   <Text style={styles.cardDesc} numberOfLines={1}>
+    {description}
+   </Text>
+  </TouchableOpacity>
  );
 }
 const styles = StyleSheet.create({
