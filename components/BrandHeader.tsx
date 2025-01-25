@@ -15,12 +15,6 @@ const styles = StyleSheet.create({
  header: {
   padding: 16,
  },
- title: {
-  fontSize: 24,
-  fontWeight: "500",
-  color: "#333",
-  marginBottom: 16,
- },
  logoContainer: {
   flexDirection: "row",
   alignItems: "center",

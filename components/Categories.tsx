@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { IconSymbol, IconSymbolName } from "./ui/IconSymbol";
 import { CategoriesProps } from "@/utils/Types";
+import { resetAndNavigate } from "@/utils/Helpers";
 
 export function Categories({ categories }: CategoriesProps) {
  return (
@@ -20,7 +21,11 @@ export function Categories({ categories }: CategoriesProps) {
     style={styles.categoryScroll}
    >
     {categories.map((category, index) => (
-     <TouchableOpacity key={index} style={styles.categoryButton}>
+     <TouchableOpacity
+      key={index}
+      style={styles.categoryButton}
+      onPress={() => resetAndNavigate(`${category.link}`)}
+     >
       <IconSymbol size={28} name={category.icon} color={Colors.primary} />
       <Text style={styles.categoryText}>{category.name}</Text>
      </TouchableOpacity>

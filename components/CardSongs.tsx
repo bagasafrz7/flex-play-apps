@@ -1,12 +1,6 @@
 import { globalStyle } from "@/lib/style/global";
-import { Colors } from "@/utils/Constant";
-import {
- View,
- Text,
- TouchableOpacity,
- ScrollView,
- StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { ContentCard } from "./ui/ContentCard";
 
 export function CardSongs() {
  return (
@@ -19,40 +13,15 @@ export function CardSongs() {
    </View>
    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     {[1, 2, 3, 4].map((item) => (
-     <View key={`song-${item}`} style={styles.songCard}>
-      <View style={styles.songThumbnail} />
-      <Text style={styles.songTitle}>Title</Text>
-      <Text style={styles.artistName}>artist_name</Text>
-     </View>
+     <ContentCard
+      title="Title"
+      description="Description"
+      thumbnail="thumbnail_url"
+      key={`song-${item}`}
+     />
+     //  </View>
     ))}
    </ScrollView>
   </View>
  );
 }
-
-const styles = StyleSheet.create({
- songCard: {
-  marginRight: 16,
-  width: 150,
-  borderColor: Colors.secondaryBorder,
-  borderWidth: 1,
-  borderRadius: 16,
-  padding: 12,
- },
- songThumbnail: {
-  width: "100%",
-  height: 125,
-  backgroundColor: "#000033",
-  borderRadius: 8,
-  marginBottom: 8,
- },
- songTitle: {
-  fontSize: 16,
-  fontWeight: "500",
-  marginBottom: 4,
- },
- artistName: {
-  color: "#666",
-  fontSize: 14,
- },
-});
