@@ -1,32 +1,17 @@
-import { Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
-
+import TabBar from "@/components/ui/TabBar";
+import { Tabs } from "expo-router";
 import { HapticTab } from "@/components/HapticTab";
 import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/utils/Constant";
-import TabBar from "@/components/ui/TabBar";
 
 export default function TabLayout() {
- const colorScheme = useColorScheme();
-
  return (
   <Tabs
    screenOptions={{
     tabBarActiveTintColor: Colors.primary,
     headerShown: false,
     tabBarButton: HapticTab,
-    // tabBarBackground: #whie,
-    // tabBarStyle: {
-    //  position: "absolute",
-    //  borderTopLeftRadius: 20,
-    //  borderTopRightRadius: 20,
-    //  borderTopWidth: 0,
-    //  paddingTop: 8,
-    //  height: 70,
-    // },
    }}
    tabBar={(props) => <TabBar {...props} />}
   >

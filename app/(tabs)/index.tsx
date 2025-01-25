@@ -14,21 +14,25 @@ export default function App() {
    name: "Song",
    icon: "music.house.fill",
    id: "song",
+   link: "/songs",
   },
   {
    name: "Movie",
    icon: "movieclapper.fill",
    id: "movie",
+   link: "/movie",
   },
   {
    name: "Apps",
    icon: "apps.ipad",
    id: "apps",
+   link: "/apps",
   },
   {
    name: "Other",
    icon: "grid.circle.fill",
    id: "other",
+   link: "#",
   },
  ];
 
