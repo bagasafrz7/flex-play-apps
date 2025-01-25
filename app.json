@@ -13,9 +13,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/flexplay-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ba_bid.FlexPlay"
     },
     "web": {
       "bundler": "metro",
