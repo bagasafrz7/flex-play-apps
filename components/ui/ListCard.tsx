@@ -1,20 +1,31 @@
 import { Colors } from "@/utils/Constant";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet, Image } from "react-native";
 
 interface ListCardProps {
  id?: number;
  title?: string;
  description?: string;
  thumbnail?: string;
+ onPress?: () => void;
 }
 
-export function ListCard({ id, title, description, thumbnail }: ListCardProps) {
+export function ListCard({
+ id,
+ title,
+ description,
+ thumbnail,
+ onPress,
+}: ListCardProps) {
  return (
-  <TouchableOpacity style={styles.listCard}>
-   <View style={styles.listIcon} />
+  <TouchableOpacity style={styles.listCard} onPress={onPress}>
+   <Image source={{ uri: thumbnail }} style={styles.listIcon} />
    <View style={styles.listInfo}>
-    <Text style={styles.listTitle}>{title}</Text>
-    <Text style={styles.listDesc}>{description}</Text>
+    <Text style={styles.listTitle} numberOfLines={2}>
+     {title}
+    </Text>
+    <Text style={styles.listDesc} numberOfLines={1}>
+     {description}
+    </Text>
    </View>
   </TouchableOpacity>
  );
