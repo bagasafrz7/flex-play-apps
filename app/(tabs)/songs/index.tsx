@@ -108,22 +108,3 @@ export default function SongsScreen() {
   </SafeAreaView>
  );
 }
-
-const styles = StyleSheet.create({
- searchButton: {
-  margin: 16,
- },
- searchBar: {
-  flexDirection: "row",
-  alignItems: "center",
-  backgroundColor: "#f5f5f5",
-  borderRadius: 25,
-  paddingHorizontal: 16,
-  paddingVertical: 12,
- },
- searchText: {
-  marginLeft: 8,
-  fontSize: 16,
-  color: "#666",
- },
-});
