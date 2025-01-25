@@ -1,3 +1,4 @@
+import React from "react";
 import {
  View,
  Text,
@@ -14,8 +15,8 @@ import { useEffect, useState } from "react";
 import { DetailAppBar } from "@/components/ui/DetailAppBar";
 import { Colors } from "@/utils/Constant";
 import { DetailCardSkeleton } from "@/components/ui/DetailCardSkelaton";
-import { IMovieResult } from "@/utils/types/movie.type";
-import { getDetailMovie } from "@/services/movie";
+import { IAppResult } from "@/utils/types/apps.type";
+import { getDetailApp } from "@/services/apps";
 
 const { width } = Dimensions.get("window");
 
@@ -24,18 +25,18 @@ export default function DetailScreen() {
  const params = useLocalSearchParams();
  const { id } = params;
 
- const [data, setData] = useState<IMovieResult[]>([]);
+ const [data, setData] = useState<IAppResult[]>([]);
  const [loading, setLoading] = useState<boolean>(true);
  const [error, setError] = useState<string | null>(null);
 
  useEffect(() => {
   const fetchData = async () => {
    try {
-    const movieId = Number(id);
-    if (isNaN(movieId)) {
+    const appId = Number(id);
+    if (isNaN(appId)) {
      throw new Error("ID tidak valid");
     }
-    const response = await getDetailMovie(movieId);
+    const response = await getDetailApp(appId);
     setData(response.results);
    } catch (error) {
     if (error instanceof Error) {
@@ -76,7 +77,7 @@ export default function DetailScreen() {
  return (
   <SafeAreaView style={styles.container}>
    {/* Header */}
-   <DetailAppBar title={`${data[0]?.trackName || "Details"}`} />
+   <DetailAppBar title={`${data[0]?.artistName || "Details"}`} />
 
    <ScrollView
     contentContainerStyle={styles.scrollViewContent}
@@ -87,7 +88,7 @@ export default function DetailScreen() {
      entering={FadeInDown.delay(200).springify()}
      style={styles.bannerContainer}
     >
-     <Image source={{ uri: data[0]?.artworkUrl100 }} style={styles.banner} />
+     <Image source={{ uri: data[0]?.artworkUrl512 }} style={styles.banner} />
     </Animated.View>
 
     {/* Content */}
@@ -96,15 +97,11 @@ export default function DetailScreen() {
      style={styles.content}
     >
      <Text style={styles.title}>{data[0]?.trackName}</Text>
-     <Text style={styles.subtitle}>{data[0]?.artistName} (Director)</Text>
+     <Text style={styles.subtitle}>{data[0]?.artistName}</Text>
 
      <View style={styles.infoContainer}>
       <View style={styles.infoRow}>
-       <Text style={styles.infoLabel}>Country:</Text>
-       <Text style={styles.infoValue}>{data[0]?.country}</Text>
-      </View>
-      <View style={styles.infoRow}>
-       <Text style={styles.infoLabel}>Genre:</Text>
+       <Text style={styles.infoLabel}>Category:</Text>
        <Text style={styles.infoValue}>{data[0]?.primaryGenreName}</Text>
       </View>
       <View style={styles.infoRow}>
@@ -114,17 +111,29 @@ export default function DetailScreen() {
        </Text>
       </View>
       <View style={styles.infoRow}>
-       <Text style={styles.infoLabel}>Duration:</Text>
+       <Text style={styles.infoLabel}>Rating:</Text>
        <Text style={styles.infoValue}>
-        {Math.floor((data[0]?.trackTimeMillis || 0) / 60000)}:
-        {Math.floor(((data[0]?.trackTimeMillis || 0) % 60000) / 1000)
-         .toString()
-         .padStart(2, "0")}
+        {data[0]?.averageUserRating.toFixed(1)} ({data[0]?.userRatingCount}{" "}
+        reviews)
        </Text>
+      </View>
+      <View style={styles.infoRow}>
+       <Text style={styles.infoLabel}>Price:</Text>
+       <Text style={styles.infoValue}>{data[0]?.formattedPrice}</Text>
+      </View>
+      <View style={styles.infoRow}>
+       <Text style={styles.infoLabel}>Size:</Text>
+       <Text style={styles.infoValue}>
+        {(parseInt(data[0]?.fileSizeBytes) / (1024 * 1024)).toFixed(2)} MB
+       </Text>
+      </View>
+      <View style={styles.infoRow}>
+       <Text style={styles.infoLabel}>Version:</Text>
+       <Text style={styles.infoValue}>{data[0]?.version}</Text>
       </View>
      </View>
 
-     <Text style={styles.description}>{data[0]?.longDescription}</Text>
+     <Text style={styles.description}>{data[0]?.description}</Text>
     </Animated.View>
 
     {/* Back Button */}
@@ -155,7 +164,6 @@ const styles = StyleSheet.create({
  bannerContainer: {
   width: width,
   height: width * 0.6,
-  objectFit: "fill",
   padding: 16,
  },
  banner: {

@@ -55,7 +55,7 @@ export default function App() {
     <CardMovies />
 
     {/* New Apps */}
-    <CardApps />
+    <CardApps limits={5} />
     <View style={globalStyle.containerButton}></View>
    </ScrollView>
   </SafeAreaView>

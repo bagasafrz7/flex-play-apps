@@ -20,7 +20,9 @@ export function DetailAppBar({ title, style }: DetailAppBarProps) {
    <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
     <Ionicons name="arrow-back" size={24} color="#000" />
    </TouchableOpacity>
-   <Text style={styles.headerTitle}>{title}</Text>
+   <Text style={styles.headerTitle} numberOfLines={1}>
+    Details
+   </Text>
    <TouchableOpacity style={styles.menuButton}>
     <Ionicons name="ellipsis-horizontal" size={24} color="#000" />
    </TouchableOpacity>

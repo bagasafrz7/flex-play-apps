@@ -32,6 +32,13 @@ export default function RootLayout() {
       headerShown: false,
      }}
     />
+    <Stack.Screen name="app/search" options={{ headerShown: false }} />
+    <Stack.Screen
+     name="app/[id]"
+     options={{
+      headerShown: false,
+     }}
+    />
    </Stack>
    <StatusBar style="auto" />
   </ThemeProvider>
