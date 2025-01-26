@@ -36,6 +36,8 @@ export default function SearchMovie() {
 
    if (!isLoadingMore) {
     setLoading(true);
+   } else {
+    setLoadingMore(true);
    }
 
    try {
@@ -63,7 +65,6 @@ export default function SearchMovie() {
 
  const handleLoadMore = useCallback(() => {
   if (!loadingMore && hasMore && !loading && searchQuery.trim() !== "") {
-   setLoadingMore(true);
    setLimit((prevLimit) => prevLimit + 10);
    fetchSearchResults(searchQuery, true);
   }
@@ -80,15 +81,7 @@ export default function SearchMovie() {
  if (error) {
   return (
    <View>
-    <Text
-     style={[
-      {
-       color: Colors.secondary,
-      },
-     ]}
-    >
-     {error}
-    </Text>
+    <Text style={{ color: Colors.secondary }}>{error}</Text>
    </View>
   );
  }
@@ -144,15 +137,22 @@ export default function SearchMovie() {
         </Text>
        </View>
       )}
-      onEndReached={handleLoadMore}
-      onEndReachedThreshold={0.5}
       ListFooterComponent={() =>
-       loadingMore ? (
+       data.length > 0 && hasMore && !loadingMore ? (
+        <TouchableOpacity
+         style={styles.loadMoreButton}
+         onPress={handleLoadMore}
+         disabled={loadingMore}
+        >
+         <Text style={styles.loadMoreText}>Load More</Text>
+        </TouchableOpacity>
+       ) : loadingMore ? (
         <View style={styles.loadingMore}>
          <ListCardSkeleton />
         </View>
        ) : null
       }
+      contentContainerStyle={{ flexGrow: 1, paddingBottom: 120 }}
      />
     )}
    </View>
@@ -178,9 +178,6 @@ const styles = StyleSheet.create({
  cancelButton: {
   padding: 4,
  },
- results: {
-  flex: 1,
- },
  noResultsContainer: {
   flex: 1,
   alignItems: "center",
@@ -196,5 +193,19 @@ const styles = StyleSheet.create({
  },
  loadingMore: {
   paddingVertical: 16,
+ },
+ loadMoreButton: {
+  paddingVertical: 14,
+  paddingHorizontal: 16,
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: Colors.primary,
+  borderRadius: 8,
+  marginVertical: 14,
+ },
+ loadMoreText: {
+  color: "#fff",
+  fontSize: 16,
+  fontWeight: "500",
  },
 });
