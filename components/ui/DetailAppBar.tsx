@@ -40,8 +40,7 @@ const styles = StyleSheet.create({
   alignItems: "center",
   justifyContent: "space-between",
   paddingHorizontal: 16,
-  paddingTop: 60,
-  paddingBottom: 16,
+  paddingTop: 40,
  },
  headerTitle: {
   fontSize: 18,
